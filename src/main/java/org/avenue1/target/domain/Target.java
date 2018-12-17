@@ -8,7 +8,9 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import org.avenue1.target.domain.enumeration.TargetTypeEnum;
 
@@ -22,6 +24,8 @@ public class Target implements Serializable {
 
     @Id
     private String id;
+
+
 
     @NotNull
     @Field("name")
@@ -46,9 +50,18 @@ public class Target implements Serializable {
     @Field("parent")
     private String parent;
 
+    @DBRef
+    @Field("children")
+    private Set<Target> children = new HashSet<>();
+
+    @DBRef
+    @Field("address")
+    private Address address;
+
     @NotNull
     @Field("instrument_type")
     private String instrumentType;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -92,6 +105,26 @@ public class Target implements Serializable {
     public Target active(Boolean active) {
         this.active = active;
         return this;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public Set<Target> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Target> children) {
+        this.children = children;
     }
 
     public void setActive(Boolean active) {
