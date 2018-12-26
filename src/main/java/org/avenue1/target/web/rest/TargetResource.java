@@ -2,6 +2,7 @@ package org.avenue1.target.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import org.avenue1.target.domain.Target;
+import org.avenue1.target.domain.enumeration.TargetTypeEnum;
 import org.avenue1.target.service.TargetService;
 import org.avenue1.target.web.rest.errors.BadRequestAlertException;
 import org.avenue1.target.web.rest.util.HeaderUtil;
@@ -26,6 +27,7 @@ import java.util.Optional;
 /**
  * REST controller for managing Target.
  */
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class TargetResource {
@@ -93,6 +95,16 @@ public class TargetResource {
     public ResponseEntity<List<Target>> getAllTargets(Pageable pageable) {
         log.debug("REST request to get a page of Targets");
         Page<Target> page = targetService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/targets");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+
+    @GetMapping("/targetsByType/{type}")
+    @Timed
+    public ResponseEntity<List<Target>> getAllTargetsByType(@PathVariable("type") String type, Pageable pageable) {
+        log.debug("REST request to get a page of Targets by type {}", type);
+        Page<Target> page = targetService.findAllByType(TargetTypeEnum.valueOf(type.toUpperCase()),pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/targets");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

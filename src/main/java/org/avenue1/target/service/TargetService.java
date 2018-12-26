@@ -1,6 +1,7 @@
 package org.avenue1.target.service;
 
 import org.avenue1.target.domain.Target;
+import org.avenue1.target.domain.enumeration.TargetTypeEnum;
 import org.avenue1.target.repository.TargetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,11 @@ public class TargetService {
         return targetRepository.findAll(pageable);
     }
 
+
+    public Page<Target> findAllByType(TargetTypeEnum type, Pageable pageable) {
+        log.debug("Request to get all Targets by type {}", type.name());
+        return targetRepository.findAllByTargetType(type, pageable);
+    }
 
     /**
      * Get one target by id.

@@ -25,6 +25,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.avenue1.target.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -118,6 +119,15 @@ public class TargetResourceIntTest {
     public void initTest() {
         targetRepository.deleteAll();
         target = createEntity();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getInvalidTargetType() throws Exception {
+
+
+        restTargetMockMvc.perform(get("/api/targetsByType/INVALID_TYPE"));
+
+
     }
 
     @Test
