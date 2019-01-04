@@ -1,9 +1,12 @@
 package org.avenue1.target.domain;
 
+import org.avenue1.target.domain.enumeration.InstrumentTypeEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import javax.sound.midi.Instrument;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
@@ -60,7 +63,7 @@ public class Target implements Serializable {
 
     @NotNull
     @Field("instrument_type")
-    private String instrumentType;
+    private InstrumentTypeEnum instrumentType;
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -183,16 +186,16 @@ public class Target implements Serializable {
         this.parent = parent;
     }
 
-    public String getInstrumentType() {
+    public InstrumentTypeEnum getInstrumentType() {
         return instrumentType;
     }
 
-    public Target instrumentType(String instrumentType) {
+    public Target instrumentType(InstrumentTypeEnum instrumentType) {
         this.instrumentType = instrumentType;
         return this;
     }
 
-    public void setInstrumentType(String instrumentType) {
+    public void setInstrumentType(InstrumentTypeEnum instrumentType) {
         this.instrumentType = instrumentType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

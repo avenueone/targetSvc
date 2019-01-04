@@ -3,6 +3,7 @@ package org.avenue1.target.web.rest;
 import org.avenue1.target.TargetSvcApp;
 
 import org.avenue1.target.domain.Target;
+import org.avenue1.target.domain.enumeration.InstrumentTypeEnum;
 import org.avenue1.target.repository.TargetRepository;
 import org.avenue1.target.service.TargetService;
 import org.avenue1.target.web.rest.errors.ExceptionTranslator;
@@ -63,8 +64,8 @@ public class TargetResourceIntTest {
     private static final String DEFAULT_PARENT = "AAAAAAAAAA";
     private static final String UPDATED_PARENT = "BBBBBBBBBB";
 
-    private static final String DEFAULT_INSTRUMENT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_INSTRUMENT_TYPE = "BBBBBBBBBB";
+    private static final InstrumentTypeEnum DEFAULT_INSTRUMENT_TYPE = InstrumentTypeEnum.FLYER;
+    private static final InstrumentTypeEnum UPDATED_INSTRUMENT_TYPE = InstrumentTypeEnum.WEB;
 
     @Autowired
     private TargetRepository targetRepository;

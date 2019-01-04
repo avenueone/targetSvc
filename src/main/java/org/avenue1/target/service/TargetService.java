@@ -1,6 +1,7 @@
 package org.avenue1.target.service;
 
 import org.avenue1.target.domain.Target;
+import org.avenue1.target.domain.enumeration.InstrumentTypeEnum;
 import org.avenue1.target.domain.enumeration.TargetTypeEnum;
 import org.avenue1.target.repository.TargetRepository;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.sound.midi.Instrument;
 import java.util.Optional;
 
 /**
@@ -48,6 +50,10 @@ public class TargetService {
         return targetRepository.findAll(pageable);
     }
 
+    public Page<Target> findAllByInstrumentType(InstrumentTypeEnum type, Pageable pageable) {
+        log.debug("Request to get all Targets by instrument type {}", type);
+        return targetRepository.findAllByInstrumentType(type, pageable);
+    }
 
     public Page<Target> findAllByType(TargetTypeEnum type, Pageable pageable) {
         log.debug("Request to get all Targets by type {}", type.name());

@@ -2,6 +2,7 @@ package org.avenue1.target.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import org.avenue1.target.domain.Target;
+import org.avenue1.target.domain.enumeration.InstrumentTypeEnum;
 import org.avenue1.target.domain.enumeration.TargetTypeEnum;
 import org.avenue1.target.service.TargetService;
 import org.avenue1.target.web.rest.errors.BadRequestAlertException;
@@ -95,6 +96,15 @@ public class TargetResource {
     public ResponseEntity<List<Target>> getAllTargets(Pageable pageable) {
         log.debug("REST request to get a page of Targets");
         Page<Target> page = targetService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/targets");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/targetsByInstrumentType/{type}")
+    @Timed
+    public ResponseEntity<List<Target>> getAllTargetsByInstrumentType(@PathVariable("type") String type, Pageable pageable) {
+        log.debug("REST request to get a page of Targets by instrument type {}", type);
+        Page<Target> page = targetService.findAllByInstrumentType(InstrumentTypeEnum.valueOf(type.toUpperCase()),pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/targets");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

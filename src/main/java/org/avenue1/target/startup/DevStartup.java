@@ -1,6 +1,7 @@
 package org.avenue1.target.startup;
 
 import org.avenue1.target.domain.Target;
+import org.avenue1.target.domain.enumeration.InstrumentTypeEnum;
 import org.avenue1.target.domain.enumeration.TargetTypeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,13 +34,13 @@ public class DevStartup extends BaseStartup {
             for ( int storeIdx = 1 ; storeIdx <= 200; storeIdx++) {
 
                 String name = "Store-" + storeIdx;
-                Target target = new Target().name(name).targetType(TargetTypeEnum.STORE).active(true).description("Sample " + storeIdx).instrumentType("flyer");
+                Target target = new Target().name(name).targetType(TargetTypeEnum.STORE).active(true).description("Sample " + storeIdx).instrumentType(InstrumentTypeEnum.FLYER);
                 Target saved = targetRepository.save(target);
                 targets.add(saved);
                 log.debug("Create store {} {}", name, saved.getId());
                 if ( (storeIdx % 20) == 0 ) {
                     name = "SG-" + sgIdx;
-                    Target storeGroup = new Target().name(name).targetType(TargetTypeEnum.STOREGROUP).active(true).description("SG " + sgIdx).instrumentType("flyer");
+                    Target storeGroup = new Target().name(name).targetType(TargetTypeEnum.STOREGROUP).active(true).description("SG " + sgIdx).instrumentType(InstrumentTypeEnum.FLYER);
                     storeGroup.setChildren(targets);
                     Target sgSaved = targetRepository.save(storeGroup);
                     log.debug("Create store group {} {}", name, sgSaved.getId());
