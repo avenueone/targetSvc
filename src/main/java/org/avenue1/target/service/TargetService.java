@@ -60,6 +60,11 @@ public class TargetService {
         return targetRepository.findAllByTargetType(type, pageable);
     }
 
+    public Page<Target> findAllByTypeAndInstrument(TargetTypeEnum type, InstrumentTypeEnum instrumentType, Pageable pageable) {
+        log.debug("Request to get all Targets by type {} and instrument {}", type.name(), instrumentType.name());
+        return targetRepository.findAllByTargetTypeAndInstrumentType(type, instrumentType, pageable);
+    }
+
     /**
      * Get one target by id.
      *

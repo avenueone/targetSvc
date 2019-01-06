@@ -119,6 +119,15 @@ public class TargetResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/targets/type/{type}/instrument/{instrumentType}")
+    @Timed
+    public ResponseEntity<List<Target>> getAllTargetsByTypeAndInstruments(@PathVariable("type") String type, @PathVariable("instrumentType") String instrumentType, Pageable pageable) {
+        log.debug("REST request to get a page of Targets by type {}", type);
+        Page<Target> page = targetService.findAllByTypeAndInstrument(TargetTypeEnum.valueOf(type.toUpperCase()), InstrumentTypeEnum.valueOf(instrumentType.toUpperCase()), pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/targets");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
     /**
      * GET  /targets/:id : get the "id" target.
      *

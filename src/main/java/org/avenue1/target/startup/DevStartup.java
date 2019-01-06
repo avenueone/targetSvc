@@ -25,20 +25,19 @@ public class DevStartup extends BaseStartup {
 
     @PostConstruct
     private void startup() {
-
         if ( targetRepository.findAll().isEmpty()) {
             log.debug("Creating some sample targets...");
             Set<Target> targets = new HashSet<>();
             int sgIdx = 1;
             // we'll create some storegroups, stores and email targets
-            for ( int storeIdx = 1 ; storeIdx <= 200; storeIdx++) {
+            for ( int storeIdx = 1 ; storeIdx <= 50; storeIdx++) {
 
                 String name = "Store-" + storeIdx;
                 Target target = new Target().name(name).targetType(TargetTypeEnum.STORE).active(true).description("Sample " + storeIdx).instrumentType(InstrumentTypeEnum.FLYER);
                 Target saved = targetRepository.save(target);
                 targets.add(saved);
                 log.debug("Create store {} {}", name, saved.getId());
-                if ( (storeIdx % 20) == 0 ) {
+                if ( (storeIdx % 5) == 0 ) {
                     name = "SG-" + sgIdx;
                     Target storeGroup = new Target().name(name).targetType(TargetTypeEnum.STOREGROUP).active(true).description("SG " + sgIdx).instrumentType(InstrumentTypeEnum.FLYER);
                     storeGroup.setChildren(targets);

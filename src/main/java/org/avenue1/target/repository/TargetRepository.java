@@ -20,5 +20,6 @@ import java.util.List;
 public interface TargetRepository extends MongoRepository<Target, String> {
     Page<Target> findAllByTargetType(TargetTypeEnum typeEnum, Pageable pageable);
     Page<Target> findAllByInstrumentType(InstrumentTypeEnum typeEnum, Pageable pageable);
+    Page<Target> findAllByTargetTypeAndInstrumentType(TargetTypeEnum typeEnum, InstrumentTypeEnum instrumentTypeEnum, Pageable pageable);
 
 }
