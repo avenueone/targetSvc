@@ -16,11 +16,11 @@
 
 eureka:
     client:
-        enabled: true
+        enabled: false
         healthcheck:
-            enabled: true
-        fetch-registry: true
-        register-with-eureka: true
+            enabled: false
+        fetch-registry: false
+        register-with-eureka: false
         instance-info-replication-interval-seconds: 10
         registry-fetch-interval-seconds: 10
     instance:
@@ -76,6 +76,8 @@ management:
     health:
         mail:
             enabled: false # When using the MailService, configure an SMTP server and set this to true
+        mongo:
+            enabled: true
     metrics:
         enabled: false # http://micrometer.io/ is disabled by default, as we use http://metrics.dropwizard.io/ instead
 
@@ -89,6 +91,12 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
+    data:
+        mongodb:
+            uri: mongodb://${MONGO_URL}
+            database: targetSvc
+        autoconfigure:
+            exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 server:
     servlet:

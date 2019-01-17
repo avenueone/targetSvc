@@ -42,8 +42,10 @@ spring:
         serialization.indent_output: true
     data:
         mongodb:
-            uri: mongodb://localhost:27017
+            uri: mongodb://${MONGO_URL}
             database: targetSvc
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
     mail:
         host: localhost
         port: 25
