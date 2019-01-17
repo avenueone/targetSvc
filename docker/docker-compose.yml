@@ -4,7 +4,7 @@ networks:
         driver: bridge
 
 services:
-    planningSvc:
+    targetSvc:
         build: .
         container_name: "target-svc"
         image: registry.avenueone.com/avo/target-svc:0.0.1-SNAPSHOT
