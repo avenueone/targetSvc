@@ -1,96 +1,71 @@
 # targetSvc
-This application was generated using JHipster 5.6.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.6.1](https://www.jhipster.tech/documentation-archive/v5.6.1).
+This is a microservice for Targets.
 
-This is a "microservice" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
-
-This application is configured for Service Discovery and Configuration with . On launch, it will refuse to start if it is not able to connect to .
+## Dependencies
+This service depends on MongoDB. ENV Variable: MONGO_URL
 
 ## Development
 
-To start your application in the dev profile, simply run:
+To start your application local:
 
-    
+``` 
+mvn clean install 
+java -jar -DMONGO_URL=localhost:27017 target/target-svc-*.jar
+```
+*** Please change localhost and port with the mongo db url
 
+Note: If you are running in IDE, please add ENV variable `MONGO_URL`
 
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+The service will start on port 8090. To check if application is started clean, run the below command:
 
-
-
-## Building for production
-
-To optimize the targetSvc application for production, run:
-
-
-To ensure everything worked, run:
+```curl -X GET http://localhost:8090/management/health```
 
 
+## Create Docker
 
-Refer to [Using JHipster in production][] for more details.
+To build docker image run:
+
+
+``` 
+mvn clean install 
+mvn verify -P docker
+ ```
+
+This will create a docker image with repository as `registry.avenueone.com/avo/target-svc` and `$VERSION` as tag.
+
+
+## Run using Docker Compose
+If you want to run both Mongo and Target Svc using docker compose, run the below command
+
+``` 
+docker-compose -f docker/docker-compose.yml  up -d
+```
+The application will be  started on port 8090. To check if application is started clean, run the below command:
+
+```curl -X GET http://localhost:8090/management/health```
+
+## Run standalone docker
+
+To run the docker image locally:
+
+```docker run -p 8090:8090 -e MONGO_URL=localhost:27017 -d registry.avenueone.com/avo/target-svc:0.0.1-SNAPSHOT ```
+
+The application will be  started on port 8090. To check if application is started clean, run the below command:
+
+```curl -X GET http://localhost:8090/management/health```
 
 ## Testing
 
-To launch your application's tests, run:
-
-    ./gradlew test
-### Other tests
-
-Performance tests are run by [Gatling][] and written in Scala. They're located in [src/test/gatling](src/test/gatling).
-
-To use those tests, you must install Gatling from [https://gatling.io/](https://gatling.io/).
-
-For more information, refer to the [Running tests page][].
+Coming soon..
 
 ### Code quality
 
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
-
-```
-docker-compose -f src/main/docker/sonar.yml up -d
-```
-
-Then, run a Sonar analysis:
-
-```
-./gradlew -Pprod clean test sonarqube
-```
-
-For more information, refer to the [Code quality page][].
-
-## Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a  database in a docker container, run:
-
-    docker-compose -f src/main/docker/.yml up -d
-
-To stop it and remove the container, run:
-
-    docker-compose -f src/main/docker/.yml down
-
-You can also fully dockerize your application and all the services that it depends on.
-To achieve this, first build a docker image of your app by running:
-
-    
-
-Then run:
-
-    docker-compose -f src/main/docker/app.yml up -d
-
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
+Coming soon..
 
 ## Continuous Integration (optional)
 
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
+Coming soon..
 
-[JHipster Homepage and latest documentation]: https://www.jhipster.tech
-[JHipster 5.6.1 archive]: https://www.jhipster.tech/documentation-archive/v5.6.1
-[Doing microservices with JHipster]: https://www.jhipster.tech/documentation-archive/v5.6.1/microservices-architecture/
-[Using JHipster in development]: https://www.jhipster.tech/documentation-archive/v5.6.1/development/
-[Using Docker and Docker-Compose]: https://www.jhipster.tech/documentation-archive/v5.6.1/docker-compose
-[Using JHipster in production]: https://www.jhipster.tech/documentation-archive/v5.6.1/production/
-[Running tests page]: https://www.jhipster.tech/documentation-archive/v5.6.1/running-tests/
-[Code quality page]: https://www.jhipster.tech/documentation-archive/v5.6.1/code-quality/
-[Setting up Continuous Integration]: https://www.jhipster.tech/documentation-archive/v5.6.1/setting-up-ci/
+## Production
 
-[Gatling]: http://gatling.io/
+Coming soon..

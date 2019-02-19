@@ -122,11 +122,13 @@ public class TargetResourceIntTest {
         target = createEntity();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getInvalidTargetType() throws Exception {
 
 
-        restTargetMockMvc.perform(get("/api/targetsByType/INVALID_TYPE"));
+        restTargetMockMvc.perform(get("/api/targetsByType/INVALID_TYPE")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isInternalServerError());
 
 
     }
